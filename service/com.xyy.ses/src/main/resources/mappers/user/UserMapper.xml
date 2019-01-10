@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.user.UserMapper">
+
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.user.User">
+    <id column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="salt" jdbcType="CHAR" property="salt" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    user_id, username, password, salt, email, mobile, status, token, create_time, update_time
+  </sql>
+
+  <select id="selectUserById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from user where user_id = #{appId,jdbcType=CHAR}
+    or username = #{appId,jdbcType=VARCHAR} or mobile = #{appId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectListUserPage" parameterType="com.xyy.domain.vo.req.UserQuery" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from user where 1 = 1
+    <if test="userName != null and userName !=''">
+        and user_name = #{userName,jdbcType=VARCHAR},
+    </if>
+    <if test="email != null and email !=''">
+      and email = #{email,jdbcType=VARCHAR},
+    </if>
+    <if test="mobile != null and mobile !=''">
+      and mobile = #{mobile,jdbcType=VARCHAR},
+    </if>
+  </select>
+
+  <delete id="deleteUserById" parameterType="java.lang.String">
+    delete from user where user_id = #{userId,jdbcType=CHAR}
+  </delete>
+
+  <insert id="insertUser" parameterType="com.xyy.domain.dto.user.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        user_id,
+      <if test="userName != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="token != null">
+        token
+      </if>
+        create_time,
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      seq(),
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR}
+      </if>
+        now(),
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateUser" parameterType="com.xyy.domain.dto.user.User">
+    update user
+    <set>
+      <if test="userName != null">
+        username = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=CHAR}
+  </update>
+
+  <update id="reSetPassword" parameterType="java.lang.String">
+      update user set password = #{password,jdbcType=CHAR} where user_id = #{userId,jdbcType=CHAR};
+  </update>
+</mapper>
