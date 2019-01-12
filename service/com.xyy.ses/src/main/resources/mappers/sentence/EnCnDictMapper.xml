@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.sentence.EnCnDictMapper">
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.sentence.EnCnDict">
+    <id column="ecd_id" jdbcType="CHAR" property="ecdId" />
+    <result column="single_word" jdbcType="VARCHAR" property="singleWord" />
+    <result column="uk_phonetic" jdbcType="VARCHAR" property="ukPhonetic" />
+    <result column="us_phonetic" jdbcType="VARCHAR" property="usPhonetic" />
+    <result column="translation" jdbcType="VARCHAR" property="translation" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ecd_id, single_word, uk_phonetic, us_phonetic, translation, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from en_cn_dict
+    where ecd_id = #{ecdId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from en_cn_dict
+    where ecd_id = #{ecdId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.EnCnDict">
+    insert into en_cn_dict (ecd_id, single_word, uk_phonetic, 
+      us_phonetic, translation, create_time
+      )
+    values (#{ecdId,jdbcType=CHAR}, #{singleWord,jdbcType=VARCHAR}, #{ukPhonetic,jdbcType=VARCHAR}, 
+      #{usPhonetic,jdbcType=VARCHAR}, #{translation,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.EnCnDict">
+    insert into en_cn_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ecdId != null">
+        ecd_id,
+      </if>
+      <if test="singleWord != null">
+        single_word,
+      </if>
+      <if test="ukPhonetic != null">
+        uk_phonetic,
+      </if>
+      <if test="usPhonetic != null">
+        us_phonetic,
+      </if>
+      <if test="translation != null">
+        translation,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ecdId != null">
+        #{ecdId,jdbcType=CHAR},
+      </if>
+      <if test="singleWord != null">
+        #{singleWord,jdbcType=VARCHAR},
+      </if>
+      <if test="ukPhonetic != null">
+        #{ukPhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="usPhonetic != null">
+        #{usPhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="translation != null">
+        #{translation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.EnCnDict">
+    update en_cn_dict
+    <set>
+      <if test="singleWord != null">
+        single_word = #{singleWord,jdbcType=VARCHAR},
+      </if>
+      <if test="ukPhonetic != null">
+        uk_phonetic = #{ukPhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="usPhonetic != null">
+        us_phonetic = #{usPhonetic,jdbcType=VARCHAR},
+      </if>
+      <if test="translation != null">
+        translation = #{translation,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ecd_id = #{ecdId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.EnCnDict">
+    update en_cn_dict
+    set single_word = #{singleWord,jdbcType=VARCHAR},
+      uk_phonetic = #{ukPhonetic,jdbcType=VARCHAR},
+      us_phonetic = #{usPhonetic,jdbcType=VARCHAR},
+      translation = #{translation,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where ecd_id = #{ecdId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.sentence.ReadSentenceTimeMapper">
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.sentence.ReadSentenceTime">
+    <id column="rst_id" jdbcType="CHAR" property="rstId" />
+    <result column="rsl_id" jdbcType="CHAR" property="rslId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rst_id, rsl_id, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from read_sentence_time
+    where rst_id = #{rstId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from read_sentence_time
+    where rst_id = #{rstId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.ReadSentenceTime">
+    insert into read_sentence_time (rst_id, rsl_id, start_time, 
+      end_time)
+    values (#{rstId,jdbcType=CHAR}, #{rslId,jdbcType=CHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.ReadSentenceTime">
+    insert into read_sentence_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rstId != null">
+        rst_id,
+      </if>
+      <if test="rslId != null">
+        rsl_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rstId != null">
+        #{rstId,jdbcType=CHAR},
+      </if>
+      <if test="rslId != null">
+        #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.ReadSentenceTime">
+    update read_sentence_time
+    <set>
+      <if test="rslId != null">
+        rsl_id = #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rst_id = #{rstId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.ReadSentenceTime">
+    update read_sentence_time
+    set rsl_id = #{rslId,jdbcType=CHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where rst_id = #{rstId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -31,8 +31,9 @@ public enum ErrorCodeEnum {
 	NOT_EXIST("E000018", "数据不存在"),
 	DUPLICATE_KEY("E000019", "数据重复"),
 	UPDATE_FAILED("E000020", "数据更新失败"),
-	INSERT_FAILED("E000021", "重复数据，添加失败"),
-	PARAM_VALUE_FAILED("E000022","参数值错误"),
+	INSERT_FAILED("E000021", "数据添加失败"),
+	INSERT_REPEAT_FAILED("E000022", "重复数据，添加失败"),
+	PARAM_VALUE_FAILED("E000023","参数值错误"),
 	;
 
 

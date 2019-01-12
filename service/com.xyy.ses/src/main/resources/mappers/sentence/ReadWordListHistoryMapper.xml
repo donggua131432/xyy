@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.sentence.ReadWordListHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.sentence.ReadWordListHistory">
+    <id column="rwl_id" jdbcType="CHAR" property="rwlId" />
+    <result column="rsl_id" jdbcType="CHAR" property="rslId" />
+    <result column="esl_id" jdbcType="CHAR" property="eslId" />
+    <result column="msw_id" jdbcType="CHAR" property="mswId" />
+    <result column="singel_word" jdbcType="VARCHAR" property="singelWord" />
+    <result column="start" jdbcType="INTEGER" property="start" />
+    <result column="end" jdbcType="INTEGER" property="end" />
+    <result column="strange" jdbcType="CHAR" property="strange" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rwl_id, rsl_id, esl_id, msw_id, singel_word, start, end, strange, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from read_word_list_history
+    where rwl_id = #{rwlId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from read_word_list_history
+    where rwl_id = #{rwlId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.ReadWordListHistory">
+    insert into read_word_list_history (rwl_id, rsl_id, esl_id, msw_id, 
+      singel_word, start, end, 
+      strange, create_time)
+    values (#{rwlId,jdbcType=CHAR}, #{rslId,jdbcType=CHAR}, #{eslId,jdbcType=CHAR}, #{mswId,jdbcType=CHAR}, 
+      #{singelWord,jdbcType=VARCHAR}, #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}, 
+      #{strange,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.ReadWordListHistory">
+    insert into read_word_list_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rwlId != null">
+        rwl_id,
+      </if>
+      <if test="rslId != null">
+        rsl_id,
+      </if>
+      <if test="eslId != null">
+        esl_id,
+      </if>
+      <if test="mswId != null">
+        msw_id,
+      </if>
+      <if test="singelWord != null">
+        singel_word,
+      </if>
+      <if test="start != null">
+        start,
+      </if>
+      <if test="end != null">
+        end,
+      </if>
+      <if test="strange != null">
+        strange,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rwlId != null">
+        #{rwlId,jdbcType=CHAR},
+      </if>
+      <if test="rslId != null">
+        #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="eslId != null">
+        #{eslId,jdbcType=CHAR},
+      </if>
+      <if test="mswId != null">
+        #{mswId,jdbcType=CHAR},
+      </if>
+      <if test="singelWord != null">
+        #{singelWord,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=INTEGER},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=INTEGER},
+      </if>
+      <if test="strange != null">
+        #{strange,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.ReadWordListHistory">
+    update read_word_list_history
+    <set>
+      <if test="rslId != null">
+        rsl_id = #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="eslId != null">
+        esl_id = #{eslId,jdbcType=CHAR},
+      </if>
+      <if test="mswId != null">
+        msw_id = #{mswId,jdbcType=CHAR},
+      </if>
+      <if test="singelWord != null">
+        singel_word = #{singelWord,jdbcType=VARCHAR},
+      </if>
+      <if test="start != null">
+        start = #{start,jdbcType=INTEGER},
+      </if>
+      <if test="end != null">
+        end = #{end,jdbcType=INTEGER},
+      </if>
+      <if test="strange != null">
+        strange = #{strange,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rwl_id = #{rwlId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.ReadWordListHistory">
+    update read_word_list_history
+    set rsl_id = #{rslId,jdbcType=CHAR},
+      esl_id = #{eslId,jdbcType=CHAR},
+      msw_id = #{mswId,jdbcType=CHAR},
+      singel_word = #{singelWord,jdbcType=VARCHAR},
+      start = #{start,jdbcType=INTEGER},
+      end = #{end,jdbcType=INTEGER},
+      strange = #{strange,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where rwl_id = #{rwlId,jdbcType=CHAR}
+  </update>
+</mapper>

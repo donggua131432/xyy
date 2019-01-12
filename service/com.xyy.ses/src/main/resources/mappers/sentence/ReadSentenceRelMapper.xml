@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.sentence.ReadSentenceRelMapper">
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.sentence.ReadSentenceRel">
+    <id column="rsr_id" jdbcType="CHAR" property="rsrId" />
+    <result column="rsl_id" jdbcType="CHAR" property="rslId" />
+    <result column="esl_id" jdbcType="CHAR" property="eslId" />
+    <result column="esl_sort" jdbcType="INTEGER" property="eslSort" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rsr_id, rsl_id, esl_id, esl_sort
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from read_sentence_rel
+    where rsr_id = #{rsrId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from read_sentence_rel
+    where rsr_id = #{rsrId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.ReadSentenceRel">
+    insert into read_sentence_rel (rsr_id, rsl_id, esl_id, esl_sort
+      )
+    values (#{rsrId,jdbcType=CHAR}, #{rslId,jdbcType=CHAR}, #{eslId,jdbcType=CHAR}, #{eslSort,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.ReadSentenceRel">
+    insert into read_sentence_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rsrId != null">
+        rsr_id,
+      </if>
+      <if test="rslId != null">
+        rsl_id,
+      </if>
+      <if test="eslId != null">
+        esl_id,
+      </if>
+      <if test="eslSort != null">
+        esl_sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rsrId != null">
+        #{rsrId,jdbcType=CHAR},
+      </if>
+      <if test="rslId != null">
+        #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="eslId != null">
+        #{eslId,jdbcType=CHAR},
+      </if>
+      <if test="eslSort != null">
+        #{eslSort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.ReadSentenceRel">
+    update read_sentence_rel
+    <set>
+      <if test="rslId != null">
+        rsl_id = #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="eslId != null">
+        esl_id = #{eslId,jdbcType=CHAR},
+      </if>
+      <if test="eslSort != null">
+        esl_sort = #{eslSort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rsr_id = #{rsrId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.ReadSentenceRel">
+    update read_sentence_rel
+    set rsl_id = #{rslId,jdbcType=CHAR},
+      esl_id = #{eslId,jdbcType=CHAR},
+      esl_sort = #{eslSort,jdbcType=INTEGER}
+    where rsr_id = #{rsrId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.sentence.EnSentenceLibMapper">
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.sentence.EnSentenceLib">
+    <id column="esl_id" jdbcType="CHAR" property="eslId" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="sentence_content" jdbcType="VARCHAR" property="sentenceContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    esl_id, user_id, sentence_content, create_time
+  </sql>
+
+  <select id="selectEnSentenceById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from en_sentence_lib
+    where esl_id = #{eslId,jdbcType=CHAR}
+  </select>
+
+  <delete id="deleteEnSentence" parameterType="java.lang.String">
+    delete from en_sentence_lib
+    where esl_id = #{eslId,jdbcType=CHAR}
+  </delete>
+
+  <insert id="insertEnSentence" parameterType="com.xyy.domain.dto.sentence.EnSentenceLib">
+    insert into en_sentence_lib (esl_id, user_id, sentence_content)
+    values (#{eslId,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{sentenceContent,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateEnSentence" parameterType="com.xyy.domain.dto.sentence.EnSentenceLib">
+    update en_sentence_lib set sentence_content = #{sentenceContent,jdbcType=VARCHAR}
+    where esl_id = #{eslId,jdbcType=CHAR}
+  </update>
+</mapper>

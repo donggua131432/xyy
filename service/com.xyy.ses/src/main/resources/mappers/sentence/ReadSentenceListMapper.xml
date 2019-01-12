@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyy.mapper.sentence.ReadSentenceListMapper">
+  <resultMap id="BaseResultMap" type="com.xyy.domain.dto.sentence.ReadSentenceList">
+    <id column="rsl_id" jdbcType="CHAR" property="rslId" />
+    <result column="rsl_name" jdbcType="VARCHAR" property="rslName" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="finish_rate" jdbcType="INTEGER" property="finishRate" />
+    <result column="strange_rate" jdbcType="INTEGER" property="strangeRate" />
+    <result column="rsl_status" jdbcType="CHAR" property="rslStatus" />
+    <result column="sort_type" jdbcType="CHAR" property="sortType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rsl_id, rsl_name, user_id, finish_rate, strange_rate, rsl_status, sort_type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from read_sentence_list
+    where rsl_id = #{rslId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from read_sentence_list
+    where rsl_id = #{rslId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.ReadSentenceList">
+    insert into read_sentence_list (rsl_id, rsl_name, user_id, 
+      finish_rate, strange_rate, rsl_status, 
+      sort_type, create_time)
+    values (#{rslId,jdbcType=CHAR}, #{rslName,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR}, 
+      #{finishRate,jdbcType=INTEGER}, #{strangeRate,jdbcType=INTEGER}, #{rslStatus,jdbcType=CHAR}, 
+      #{sortType,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.ReadSentenceList">
+    insert into read_sentence_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rslId != null">
+        rsl_id,
+      </if>
+      <if test="rslName != null">
+        rsl_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="finishRate != null">
+        finish_rate,
+      </if>
+      <if test="strangeRate != null">
+        strange_rate,
+      </if>
+      <if test="rslStatus != null">
+        rsl_status,
+      </if>
+      <if test="sortType != null">
+        sort_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rslId != null">
+        #{rslId,jdbcType=CHAR},
+      </if>
+      <if test="rslName != null">
+        #{rslName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="finishRate != null">
+        #{finishRate,jdbcType=INTEGER},
+      </if>
+      <if test="strangeRate != null">
+        #{strangeRate,jdbcType=INTEGER},
+      </if>
+      <if test="rslStatus != null">
+        #{rslStatus,jdbcType=CHAR},
+      </if>
+      <if test="sortType != null">
+        #{sortType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.ReadSentenceList">
+    update read_sentence_list
+    <set>
+      <if test="rslName != null">
+        rsl_name = #{rslName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="finishRate != null">
+        finish_rate = #{finishRate,jdbcType=INTEGER},
+      </if>
+      <if test="strangeRate != null">
+        strange_rate = #{strangeRate,jdbcType=INTEGER},
+      </if>
+      <if test="rslStatus != null">
+        rsl_status = #{rslStatus,jdbcType=CHAR},
+      </if>
+      <if test="sortType != null">
+        sort_type = #{sortType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rsl_id = #{rslId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.ReadSentenceList">
+    update read_sentence_list
+    set rsl_name = #{rslName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      finish_rate = #{finishRate,jdbcType=INTEGER},
+      strange_rate = #{strangeRate,jdbcType=INTEGER},
+      rsl_status = #{rslStatus,jdbcType=CHAR},
+      sort_type = #{sortType,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where rsl_id = #{rslId,jdbcType=CHAR}
+  </update>
+</mapper>

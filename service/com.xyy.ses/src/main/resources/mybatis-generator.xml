@@ -14,9 +14,9 @@
 
         <!-- 数据库的相关配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.2.99:3306/ac"
-                        userId="admin"
-                        password="gy123456"/>
+                        connectionURL="jdbc:mysql://rm-wz9t6661h6dl906905o.mysql.rds.aliyuncs.com:3306/xyy"
+                        userId="xyy"
+                        password="bK1s7yivnD14l^jm"/>
         <!-- 默认false，把JDBC【DECIMAL】和【NUMERIC】类型解析为 Integer，
         为true时把JDBC【DECIMAL】和【NUMERIC】类型解析为java.math.BigDecimal -->
         <javaTypeResolver>
@@ -24,23 +24,31 @@
         </javaTypeResolver>
 
         <!-- 实体类生成的位置 -->
-        <javaModelGenerator targetPackage="com.xyy.domain.dto.user" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.xyy.domain.dto.sentence" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- *Mapper.xml 文件的位置 -->
-        <sqlMapGenerator targetPackage="mappers.user" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mappers.sentence" targetProject="src/main/resources">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!-- Mapper 接口文件的位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xyy.mapper.user" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xyy.mapper.sentence" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table  schema="xyy" tableName="user" domainObjectName="VideoSub" enableCountByExample="false"
-                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="en_cn_dict" domainObjectName="EnCnDict" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="en_sentence_lib" domainObjectName="EnSentenceLib" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="mark_single_word" domainObjectName="MarkSingleWord" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="mark_word_explains" domainObjectName="MarkWordExplains" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="read_sentence_list" domainObjectName="ReadSentenceList" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="read_sentence_rel" domainObjectName="ReadSentenceRel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="read_sentence_time" domainObjectName="ReadSentenceTime" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="read_word_list" domainObjectName="ReadWordList" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="read_word_list_history" domainObjectName="ReadWordListHistory" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+        <table  schema="xyy" tableName="sentence_word_rel" domainObjectName="SentenceWordRel" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

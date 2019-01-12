@@ -43,7 +43,7 @@ public class UserController {
 
     @ApiOperation(value = "获取分页用户列表", notes = "获取分页用户列表")
     @PostMapping("/listAllUserPage")
-    public ReturnInfo<ResultPage<User>> ListAllUserPage(@ApiParam("用户查询参数") @RequestBody UserQuery userQuery) {
+    public ReturnInfo<ResultPage<User>> listAllUserPage(@ApiParam("用户查询参数") @RequestBody UserQuery userQuery) {
         PageInfo<User> pageInfo = userService.selectListUserPage(userQuery);
         ResultPage<User> resultPage = ResultPage.getInstance().setPageNum(pageInfo.getPageNum())
                 .setPages(pageInfo.getPages())
