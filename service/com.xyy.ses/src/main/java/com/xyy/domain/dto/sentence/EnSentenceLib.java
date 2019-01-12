@@ -15,9 +15,9 @@ public class EnSentenceLib implements Serializable {
 
     @ApiModelProperty("句子ID")
     private String eslId;
-    @ApiModelProperty("用户ID")
+    @ApiModelProperty(value = "用户ID", required = true)
     private String userId;
-    @ApiModelProperty("句子内容")
+    @ApiModelProperty(value = "句子内容", required = true)
     private String sentenceContent;
     @ApiModelProperty("创建时间")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
