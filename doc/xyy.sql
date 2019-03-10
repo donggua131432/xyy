@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/1/11 16:30:49                           */
+/* Created on:     2019/3/10 17:35:53                           */
 /*==============================================================*/
 
 
@@ -23,6 +23,8 @@ drop table if exists read_word_list;
 drop table if exists read_word_list_history;
 
 drop table if exists sentence_word_rel;
+
+drop table if exists user;
 
 /*==============================================================*/
 /* Table: en_cn_dict                                            */
@@ -111,7 +113,7 @@ create table read_sentence_rel
    rsr_id               char(32) not null comment '播单句子关系ID',
    rsl_id               char(32) not null comment '播单ID',
    esl_id               char(32) not null comment '句子ID',
-   esl_sort             int,
+   esl_sort             int comment '排序',
    primary key (rsr_id)
 );
 
@@ -182,4 +184,24 @@ create table sentence_word_rel
 );
 
 alter table sentence_word_rel comment '句子和单词关联关系';
+
+/*==============================================================*/
+/* Table: user                                                  */
+/*==============================================================*/
+create table user
+(
+   user_id              char(32) not null comment '用户ID',
+   username             varchar(64) comment '用户名',
+   password             char(32) comment '密码',
+   salt                 char(8) comment '盐',
+   email                varchar(64) comment '邮箱',
+   mobile               varchar(20) comment '手机',
+   status               char(1) not null default '0' comment '状态【user_status(0：正常 1：禁用)】',
+   token                varchar(256) comment 'token鉴权',
+   create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '操作时间',
+   primary key (user_id)
+);
+
+alter table user comment '用户信息';
 

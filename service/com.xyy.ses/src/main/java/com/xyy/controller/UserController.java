@@ -6,7 +6,7 @@ import com.xyy.domain.ResultPage;
 import com.xyy.domain.ReturnInfo;
 import com.xyy.domain.dto.user.User;
 import com.xyy.domain.vo.req.UserQuery;
-import com.xyy.domain.vo.req.UserRegister;
+import com.xyy.domain.vo.req.UserRegisterReq;
 import com.xyy.domain.vo.res.DynamicSecretKey;
 import com.xyy.enums.ErrorCodeEnum;
 import com.xyy.redis.RedisService;
@@ -100,12 +100,12 @@ public class UserController {
 
     @ApiOperation(value = "用户注册", notes = "用户注册")
     @PostMapping("/register")
-    public ReturnInfo register(@ApiParam(name = "User",value = "用户注册信息",required = true) @RequestBody UserRegister userRegister) {
+    public ReturnInfo register(@ApiParam(name = "User",value = "用户注册信息",required = true) @RequestBody UserRegisterReq userRegisterReq) {
         User user = new User();
-        user.setUserName(userRegister.getUserName());
-        user.setEmail(userRegister.getEmail());
-        user.setMobile(userRegister.getMobile());
-        user.setPassword(userRegister.getPassword());
+        user.setUserName(userRegisterReq.getUserName());
+        user.setEmail(userRegisterReq.getEmail());
+        user.setMobile(userRegisterReq.getMobile());
+        user.setPassword(userRegisterReq.getPassword());
 
         int flag = userService.addUser(user);
         ErrorCodeEnum ee = flag > 0 ? ErrorCodeEnum.SUCCESS:ErrorCodeEnum.FAILED;

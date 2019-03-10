@@ -133,6 +133,7 @@
   </update>
 
   <update id="reSetPassword" parameterType="java.lang.String">
-      update user set password = #{password,jdbcType=CHAR} where user_id = #{userId,jdbcType=CHAR};
+      update user set password = #{password,jdbcType=CHAR}, slat = #{slat,jdbcType=CHAR}
+      where user_id = #{userId,jdbcType=CHAR};
   </update>
 </mapper>

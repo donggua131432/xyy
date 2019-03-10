@@ -10,73 +10,23 @@
   <sql id="Base_Column_List">
     mwe_id, msw_id, explains, create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectMarkWordExplainsById" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from mark_word_explains
     where mwe_id = #{mweId,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from mark_word_explains
-    where mwe_id = #{mweId,jdbcType=CHAR}
+
+  <delete id="deleteMarkWordExplains" parameterType="java.lang.String">
+    delete from mark_word_explains where mwe_id = #{mweId,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.MarkWordExplains">
-    insert into mark_word_explains (mwe_id, msw_id, explains, 
-      create_time)
-    values (#{mweId,jdbcType=CHAR}, #{mswId,jdbcType=CHAR}, #{explains,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+
+  <insert id="insertMarkWordExplainsBatch" parameterType="java.util.List">
+    insert into mark_word_explains (mwe_id, msw_id, explains, create_time) values
+    <foreach collection="markWordExplains" item="item" index="index" separator="," >
+      (#{item.mweId,jdbcType=CHAR}, #{item.mswId,jdbcType=CHAR}, #{item.explains,jdbcType=VARCHAR}, now())
+    </foreach>
   </insert>
-  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.MarkWordExplains">
-    insert into mark_word_explains
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="mweId != null">
-        mwe_id,
-      </if>
-      <if test="mswId != null">
-        msw_id,
-      </if>
-      <if test="explains != null">
-        explains,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="mweId != null">
-        #{mweId,jdbcType=CHAR},
-      </if>
-      <if test="mswId != null">
-        #{mswId,jdbcType=CHAR},
-      </if>
-      <if test="explains != null">
-        #{explains,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.MarkWordExplains">
-    update mark_word_explains
-    <set>
-      <if test="mswId != null">
-        msw_id = #{mswId,jdbcType=CHAR},
-      </if>
-      <if test="explains != null">
-        explains = #{explains,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where mwe_id = #{mweId,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.MarkWordExplains">
-    update mark_word_explains
-    set msw_id = #{mswId,jdbcType=CHAR},
-      explains = #{explains,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where mwe_id = #{mweId,jdbcType=CHAR}
-  </update>
+
+
 </mapper>

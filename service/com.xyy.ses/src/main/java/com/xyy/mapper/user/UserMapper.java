@@ -18,6 +18,6 @@ public interface UserMapper {
 
     int updateUser(User user);
 
-    int reSetPassword(@Param("userId") String userId, @Param("password") String password);
+    int reSetPassword(@Param("userId") String userId, @Param("password") String password, @Param("slat") String slat);
 
 }

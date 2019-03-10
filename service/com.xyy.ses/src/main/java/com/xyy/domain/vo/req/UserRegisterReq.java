@@ -12,9 +12,9 @@ import java.io.Serializable;
  * @创建时间: 2019/1/3 16:32
  * @版本号: V1.0
  */
-@ApiModel(value = "UserRegister",description = "用户注册信息")
+@ApiModel(value = "UserRegisterReq",description = "用户注册信息")
 @Data
-public class UserRegister implements Serializable {
+public class UserRegisterReq implements Serializable {
     private static final long serialVersionUID = 3421657132936565167L;
 
     @ApiModelProperty("用户名")

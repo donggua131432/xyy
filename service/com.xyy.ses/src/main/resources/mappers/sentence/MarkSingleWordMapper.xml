@@ -10,28 +10,20 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
   <sql id="Base_Column_List">
     msw_id, user_id, singel_word, phonetic, consult_status, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from mark_single_word
+  <select id="selectMarkSingleWordById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" /> from mark_single_word
     where msw_id = #{mswId,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from mark_single_word
-    where msw_id = #{mswId,jdbcType=CHAR}
+
+  <delete id="deleteMarkSingleWord" parameterType="java.lang.String">
+    delete from mark_single_word where msw_id = #{mswId,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.xyy.domain.dto.sentence.MarkSingleWord">
-    insert into mark_single_word (msw_id, user_id, singel_word, 
-      phonetic, consult_status, create_time, 
-      update_time)
-    values (#{mswId,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{singelWord,jdbcType=VARCHAR}, 
-      #{phonetic,jdbcType=VARCHAR}, #{consultStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.xyy.domain.dto.sentence.MarkSingleWord">
+
+  <insert id="insertMarkSingleWord" parameterType="com.xyy.domain.dto.sentence.MarkSingleWord">
     insert into mark_single_word
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="mswId != null">
@@ -48,12 +40,6 @@
       </if>
       <if test="consultStatus != null">
         consult_status,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -72,46 +58,13 @@
       <if test="consultStatus != null">
         #{consultStatus,jdbcType=CHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xyy.domain.dto.sentence.MarkSingleWord">
+
+  <update id="updateMarkSingleWord" parameterType="com.xyy.domain.dto.sentence.MarkSingleWord">
     update mark_single_word
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=CHAR},
-      </if>
-      <if test="singelWord != null">
-        singel_word = #{singelWord,jdbcType=VARCHAR},
-      </if>
-      <if test="phonetic != null">
-        phonetic = #{phonetic,jdbcType=VARCHAR},
-      </if>
-      <if test="consultStatus != null">
-        consult_status = #{consultStatus,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where msw_id = #{mswId,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.xyy.domain.dto.sentence.MarkSingleWord">
-    update mark_single_word
-    set user_id = #{userId,jdbcType=CHAR},
-      singel_word = #{singelWord,jdbcType=VARCHAR},
-      phonetic = #{phonetic,jdbcType=VARCHAR},
-      consult_status = #{consultStatus,jdbcType=CHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    set phonetic = #{phonetic,jdbcType=VARCHAR},
+      consult_status = #{consultStatus,jdbcType=CHAR}
     where msw_id = #{mswId,jdbcType=CHAR}
   </update>
 </mapper>

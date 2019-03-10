@@ -55,7 +55,7 @@ public class PasswordRealm extends AuthorizingRealm {
             // 用盐对密码进行MD5加密
             String passMd5Str = new SimpleHash("MD5",
                     passwordToken.getPassword(),
-                    ByteSource.Util.bytes(account.getSalt()),2).toHex();
+                    ByteSource.Util.bytes(account.getSalt()),5).toHex();
             passwordToken.setPassword(passMd5Str);
             return new SimpleAuthenticationInfo(appId,account.getPassword(),getName());
         } else {

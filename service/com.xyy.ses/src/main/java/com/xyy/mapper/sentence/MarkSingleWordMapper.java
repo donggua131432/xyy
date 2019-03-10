@@ -3,15 +3,13 @@ package com.xyy.mapper.sentence;
 import com.xyy.domain.dto.sentence.MarkSingleWord;
 
 public interface MarkSingleWordMapper {
-    int deleteByPrimaryKey(String mswId);
 
-    int insert(MarkSingleWord record);
+    int deleteMarkSingleWord(String mswId);
 
-    int insertSelective(MarkSingleWord record);
+    int insertMarkSingleWord(MarkSingleWord markSingleWord);
 
-    MarkSingleWord selectByPrimaryKey(String mswId);
+    MarkSingleWord selectMarkSingleWordById(String mswId);
 
-    int updateByPrimaryKeySelective(MarkSingleWord record);
+    int updateMarkSingleWord(MarkSingleWord markSingleWord);
 
-    int updateByPrimaryKey(MarkSingleWord record);
 }

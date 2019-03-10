@@ -51,7 +51,7 @@ public class UserService {
         String salt = StringUtil.randomNumStr(8);
         //String password = MD5Util.md5("gy123456"+salt);
         String password = new SimpleHash("MD5",
-                user.getPassword(), ByteSource.Util.bytes(salt),2).toHex();
+                user.getPassword(), ByteSource.Util.bytes(salt),5).toHex();
         user.setSalt(salt);
         user.setPassword(password);
         return userMapper.insertUser(user);
@@ -67,13 +67,14 @@ public class UserService {
 
     public int reSetPassword(String userId) {
         String salt = StringUtil.randomNumStr(8);
-        String password = MD5Util.md5("gy123456"+salt);
-        return userMapper.reSetPassword(userId,password);
+        String password = new SimpleHash("MD5",
+                "xyy123456", ByteSource.Util.bytes(salt),5).toHex();
+        return userMapper.reSetPassword(userId,password,salt);
     }
 
     public static void main(String[] args) {
         String password = new SimpleHash("MD5",
-                "gy123456", ByteSource.Util.bytes("l14GQyKI"),2).toHex();
+                "xyy123456", ByteSource.Util.bytes("l14GQyKI"),5).toHex();
         System.out.println(password);
 
         List list1 =new ArrayList();

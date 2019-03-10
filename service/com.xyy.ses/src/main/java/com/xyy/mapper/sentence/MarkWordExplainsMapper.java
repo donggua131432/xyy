@@ -1,17 +1,18 @@
 package com.xyy.mapper.sentence;
 
 import com.xyy.domain.dto.sentence.MarkWordExplains;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MarkWordExplainsMapper {
-    int deleteByPrimaryKey(String mweId);
 
-    int insert(MarkWordExplains record);
+    MarkWordExplains selectMarkWordExplainsById(String mweId);
 
-    int insertSelective(MarkWordExplains record);
+    int deleteMarkWordExplains(String mweId);
 
-    MarkWordExplains selectByPrimaryKey(String mweId);
+    int insertMarkWordExplainsBatch(@Param("markWordExplains") List<MarkWordExplains> markWordExplains);
 
-    int updateByPrimaryKeySelective(MarkWordExplains record);
 
-    int updateByPrimaryKey(MarkWordExplains record);
+
 }
